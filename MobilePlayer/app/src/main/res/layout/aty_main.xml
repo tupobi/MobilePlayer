@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_bottomTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#22000000"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!--即android:gravity用于设置View中内容相对于View组件的对齐方式，-->
+        <!--而android:layout_gravity用于设置View组件相对于Container的对齐方式。-->
+        <!--文字和图片之间的距离drawablePadding-->
+        <!--内边距，父控件之间的距离padding-->
+        <!--android:button="@android:color/transparent" 设置按钮透明-->
+        <RadioButton
+            android:id="@+id/rb_localVideo"
+            style="@style/bottom_tag_style"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/rb_local_video_drawable_selector"
+            android:text="本地视频" />
+        <RadioButton
+            android:id="@+id/rb_localAudio"
+            style="@style/bottom_tag_style"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/rb_local_audio_drawable_selector"
+            android:text="本地音乐" />
+        <RadioButton
+            android:id="@+id/rb_netVideo"
+            style="@style/bottom_tag_style"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/rb_net_video_drawable_selector"
+            android:text="网络视频" />
+        <RadioButton
+            android:id="@+id/rb_netAudio"
+            style="@style/bottom_tag_style"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/rb_net_audio_drawable_selector"
+            android:text="网络音乐" />
+
+
+    </RadioGroup>
+
+</LinearLayout>
