@@ -21,7 +21,7 @@ public class LocalAudioPager extends BasePager {
     @Override
     public View initView() {
         LogUtil.e("本地音乐页面初始化！");
-        tv = new TextView(mcontext);
+        tv = new TextView(mContext);
         tv.setTextSize(20);
         return tv;
     }

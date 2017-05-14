@@ -20,7 +20,7 @@ public class AtySplash extends Activity {
     private Handler handler;
     private Timer timer;
     private TimerTask timerTask;
-    private int countDown = 5;
+    private int countDown = 6;
     private boolean isMainLaunched = false;
 
     @Override
@@ -59,7 +59,7 @@ public class AtySplash extends Activity {
                 if (!isMainLaunched)
                     startAtyMain();
             }
-        }, 5 * 1000);
+        }, 6 * 1000);
 
     }
 

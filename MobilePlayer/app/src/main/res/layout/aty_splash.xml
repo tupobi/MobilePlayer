@@ -5,9 +5,13 @@
     android:id="@+id/rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#10000000"
     tools:context="com.example.administrator.mobileplayer.aty.AtySplash">
 
     <TextView
+        android:text="跳过"
+        android:background="@drawable/tv_count_down_bg_selector"
+        android:textSize="16sp"
         android:id="@+id/tv_CountDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="30dp"
         android:layout_marginRight="10dp"
-        android:textColor="@android:color/holo_blue_light" />
+        android:textColor="@android:color/black" />
 
     <ImageView
         android:id="@+id/iv_launcher"

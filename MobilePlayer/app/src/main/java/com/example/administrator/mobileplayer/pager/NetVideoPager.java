@@ -21,7 +21,7 @@ public class NetVideoPager extends BasePager {
     @Override
     public View initView() {
         LogUtil.e("网络视频页面初始化！");
-        tv = new TextView(mcontext);
+        tv = new TextView(mContext);
         tv.setTextSize(20);
         return tv;
     }

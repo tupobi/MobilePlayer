@@ -9,11 +9,12 @@ import android.view.View;
 
 public abstract class BasePager {
 
-    public final Context mcontext;
-    private View rootView;
+    public final Context mContext;
+    public View rootView;
+    public boolean isInit;
 
-    public BasePager(Context mcontext) {
-        this.mcontext = mcontext;
+    public BasePager(Context mContext) {
+        this.mContext = mContext;
         this.rootView = initView();
     }
 

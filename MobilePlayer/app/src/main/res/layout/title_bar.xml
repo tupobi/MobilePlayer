@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.administrator.mobileplayer.view.TitleBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="#ff3097fd"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_topbanner_logo" />
+
+    <TextView
+        android:clickable="true"
+        android:id="@+id/tv_topSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:textColor="@drawable/tv_search_textcolor_selector"
+        android:background="@drawable/tv_search_bc_selector"
+        android:drawableLeft="@drawable/tv_search_drawable_selector"
+        android:drawablePadding="3dp"
+        android:text="全网搜索"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
+
+        <ImageView
+            android:id="@+id/iv_topbannerGame"
+            android:src="@drawable/ic_topbanner_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!--layout_alignRight对齐目标空间右上角，且没有间距！-->
+        <!--layout_toRightOf是相对于父控件将之放在目标空间右边，受父控件属性gravity=center的影响！-->
+        <ImageView
+            android:layout_alignRight="@id/iv_topbannerGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/red_dot" />
+
+        <ImageView
+            android:id="@+id/iv_topbannerHistoryRecord"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_topbannerGame"
+            android:src="@drawable/ic_topbanner_record"/>
+
+
+    </RelativeLayout>
+
+</com.example.administrator.mobileplayer.view.TitleBar>
