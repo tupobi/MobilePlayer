@@ -1,10 +1,12 @@
 package com.example.administrator.mobileplayer.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/5/13.
  */
 
-public class LocalVideo {
+public class LocalVideo implements Serializable{
     private String name;
     private long duration;
     private long size;
@@ -57,5 +59,16 @@ public class LocalVideo {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+
+    @Override
+    public String toString() {
+        return "LocalVideo{" +
+                "name='" + name + '\'' +
+                ", duration=" + duration +
+                ", size=" + size +
+                ", data='" + data + '\'' +
+                ", artist='" + artist + '\'' +
+                '}';
     }
 }

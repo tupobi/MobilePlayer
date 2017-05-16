@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -22,6 +23,7 @@ import com.example.administrator.mobileplayer.base.BasePager;
 import com.example.administrator.mobileplayer.entity.LocalVideo;
 import com.example.administrator.mobileplayer.util.LogUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class LocalVideoPager extends BasePager {
     private ListView lvLocalVideo;
     private TextView tvLoadingLocalVideo, tvNotFoundLocalVideo;
     private ProgressBar pbLoadingLocalVideo;
-    private List<LocalVideo> localVideos;
+    private ArrayList<LocalVideo> localVideos;
     private LocalVideoAdapter localVideoAdapter;
 
     private Handler handler = new Handler() {
@@ -80,9 +82,23 @@ public class LocalVideoPager extends BasePager {
 //                mContext.startActivity(intent);
 
                 //显式，调用自定义播放器。
+                //传递一个具体的视频地址
+//                Intent intent = new Intent(mContext, SystemVideoPlayer.class);
+//                intent.setDataAndType(Uri.parse(localVideo.getData()), "video/*");
+//                mContext.startActivity(intent);
+
+                //传递列表视频,需要序列化，不然崩溃。
                 Intent intent = new Intent(mContext, SystemVideoPlayer.class);
-                intent.setDataAndType(Uri.parse(localVideo.getData()), "video/*");
+//                intent.setDataAndType(Uri.parse(localVideo.getData()), "video/*");
+                //传递当前点击视频项
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("localVideos", (Serializable) localVideos);
+//                putSerializable参数可以为ArrayList<>类型，不能为List类型，需要强转
+                intent.putExtras(bundle);
+//                bundle也要加入到intent中去。
+                intent.putExtra("position", i);
                 mContext.startActivity(intent);
+
             }
         });
         return view;
@@ -120,6 +136,7 @@ public class LocalVideoPager extends BasePager {
                         localVideos.add(new LocalVideo(cursor.getString(0), cursor.getLong(1), cursor.getLong(2),
                                 cursor.getString(3), cursor.getString(4)));
                     }
+                    LogUtil.e(localVideos.size() + "");
                     cursor.close();
                 }
                 handler.sendEmptyMessage(1);
