@@ -5,7 +5,7 @@
     android:background="#000000"
     android:gravity="center">
 
-    <VideoView
+    <com.example.administrator.mobileplayer.view.MyVideoView
         android:id="@+id/vv_videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,6 +14,21 @@
     <include
         android:id="@+id/media_controller"
         layout="@layout/media_controller"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/ll_loadingVideoPrompt"
+        layout="@layout/ll_loading_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/ll_loadingVideoBackground"
+        layout="@layout/ll_loading_video_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

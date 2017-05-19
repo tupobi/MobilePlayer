@@ -54,7 +54,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_soundSet"
+            android:id="@+id/btn_mute"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_sound_set_selector" />
@@ -67,7 +67,6 @@
             android:layout_weight="1"
             android:maxHeight="6dp"
             android:minHeight="6dp"
-            android:progress="40"
             android:progressDrawable="@drawable/sound_progress_horizontal"
             android:thumb="@drawable/progress_thumb" />
 
@@ -153,7 +152,6 @@
             android:layout_weight="1"
             android:maxHeight="6dp"
             android:minHeight="6dp"
-            android:progress="40"
             android:progressDrawable="@drawable/sound_progress_horizontal"
             android:thumb="@drawable/progress_thumb" />
 

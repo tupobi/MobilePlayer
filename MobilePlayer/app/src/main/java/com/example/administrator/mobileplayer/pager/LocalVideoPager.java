@@ -25,7 +25,6 @@ import com.example.administrator.mobileplayer.util.LogUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/5/11.
@@ -75,7 +74,7 @@ public class LocalVideoPager extends BasePager {
         lvLocalVideo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                LocalVideo localVideo = localVideos.get(i);
+//                LocalVideo localVideo = localVideos.get(i);
                 //隐式，调用所有匹配的播放器。
 //                Intent intent = new Intent();
 //                intent.setDataAndType(Uri.parse(localVideo.getData()), "video/*");
@@ -92,13 +91,12 @@ public class LocalVideoPager extends BasePager {
 //                intent.setDataAndType(Uri.parse(localVideo.getData()), "video/*");
                 //传递当前点击视频项
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("localVideos", (Serializable) localVideos);
+                bundle.putSerializable("localVideos", localVideos);
 //                putSerializable参数可以为ArrayList<>类型，不能为List类型，需要强转
                 intent.putExtras(bundle);
 //                bundle也要加入到intent中去。
                 intent.putExtra("position", i);
                 mContext.startActivity(intent);
-
             }
         });
         return view;
