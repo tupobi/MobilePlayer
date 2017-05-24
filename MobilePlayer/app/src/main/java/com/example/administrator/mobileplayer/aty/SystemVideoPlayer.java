@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.administrator.mobileplayer.R;
 import com.example.administrator.mobileplayer.entity.LocalVideo;
@@ -48,7 +49,7 @@ public class SystemVideoPlayer extends Activity implements View.OnClickListener 
     private static final int PROGRESS = 1;
     private static final int HIDE_MEDIA_CONTROLLER = 2;
     private static final int SHOW_SPEED_PROMPT = 3;
-    private boolean isFullOfScreen = true;
+    private boolean isFullOfScreen = false;
     private RelativeLayout mediaController;
     private MyVideoView vvVideoView;
     private LinearLayout llTop;
@@ -212,7 +213,7 @@ public class SystemVideoPlayer extends Activity implements View.OnClickListener 
                 handler.sendEmptyMessage(PROGRESS);
 
                 videoWidth = mediaPlayer.getVideoWidth();
-                videoHeight = mediaPlayer.getVideoWidth();
+                videoHeight = mediaPlayer.getVideoHeight();
                 setVideoScreenType();
                 ll_loadingVideoBackground.setVisibility(View.GONE);
             }

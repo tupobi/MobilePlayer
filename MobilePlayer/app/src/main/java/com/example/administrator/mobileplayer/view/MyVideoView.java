@@ -32,8 +32,8 @@ public class MyVideoView extends android.widget.VideoView {
 
     public void setVideoSize(int videoWidth, int videoHeight){
         ViewGroup.LayoutParams params = getLayoutParams();
-        params.height = videoHeight;
         params.width = videoWidth;
+        params.height = videoHeight;
         setLayoutParams(params);
     }
 }
