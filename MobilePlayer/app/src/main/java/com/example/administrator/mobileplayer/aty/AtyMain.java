@@ -1,17 +1,20 @@
 package com.example.administrator.mobileplayer.aty;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.administrator.mobileplayer.R;
 import com.example.administrator.mobileplayer.base.BasePager;
@@ -121,5 +124,29 @@ public class AtyMain extends FragmentActivity {
             pager.isInit = true;
         }
         return pager;
+    }
+
+    private boolean isExit;
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            if (posOfPagers != 0) {
+                rgBottomTag.check(R.id.rb_localVideo);
+                return true;
+            }else if (!isExit){
+                isExit = true;
+                Toast.makeText(this, "连按退出", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        isExit = false;
+                        //1.5秒后，重置isExit = false;
+                    }
+                }, 1500);
+                return true;
+            }
+        }
+        //如果在1.5秒内又按了一次退出，此时isExit = true 两个if else if都不会执行，直接退出软件。
+        return super.onKeyUp(keyCode, event);
     }
 }

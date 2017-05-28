@@ -24,6 +24,8 @@ import com.example.administrator.mobileplayer.entity.LocalAudio;
 import com.example.administrator.mobileplayer.util.CacheUtils;
 import com.example.administrator.mobileplayer.util.LogUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -213,7 +215,9 @@ public class MusicPlayerService extends Service {
         @Override
         public void onPrepared(MediaPlayer mediaPlayer) {
             //通知播放页面获取音频信息。
-            notifyAudioData(OPEN_AUDIO);
+//            notifyAudioData(OPEN_AUDIO);
+
+            EventBus.getDefault().post(localAudio);
             start();
         }
     }
@@ -230,7 +234,9 @@ public class MusicPlayerService extends Service {
             if (CacheUtils.getPlayMode(MusicPlayerService.this, CacheUtils.PLAY_MODE) == MusicPlayerService.ORDER_NOMAL){
                 //如果不是最后一个，播放下一个，是最后一个，停止播放并发送播放完成广播，将播放按钮设置为暂停
                 if (position == localAudios.size()-1){
-                    notifyPlayComplete(PLAY_COMPLETE);
+//                    notifyPlayComplete(PLAY_COMPLETE);
+                    boolean tag = false;
+                    EventBus.getDefault().post(localAudios);
                 }else {
                     next();
                 }

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.administrator.mobileplayer.R;
+import com.example.administrator.mobileplayer.aty.AtySearch;
 
 /**
  * Created by Administrator on 2017/5/12.
@@ -15,8 +16,8 @@ import com.example.administrator.mobileplayer.R;
 
 public class TitleBar extends LinearLayout implements View.OnClickListener {
     private View tvTopSearch, ivTopGameBanner, getIvTopHistoryRecordBanner;
-
     private Context mContext;
+
     public TitleBar(Context context) {
         this(context, null);
     }
@@ -48,9 +49,10 @@ public class TitleBar extends LinearLayout implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_topSearch:
-                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "搜索", Toast.LENGTH_SHORT).show();
+                AtySearch.actionStart(mContext);
                 break;
             case R.id.iv_topbannerGame:
                 Toast.makeText(mContext, "游戏", Toast.LENGTH_SHORT).show();

@@ -13,17 +13,17 @@
         android:src="@drawable/ic_topbanner_logo" />
 
     <TextView
-        android:clickable="true"
         android:id="@+id/tv_topSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
-        android:textColor="@drawable/tv_search_textcolor_selector"
         android:background="@drawable/tv_search_bc_selector"
+        android:clickable="true"
         android:drawableLeft="@drawable/tv_search_drawable_selector"
         android:drawablePadding="3dp"
         android:text="全网搜索"
+        android:textColor="@drawable/tv_search_textcolor_selector"
         android:textSize="14sp" />
 
     <RelativeLayout
@@ -33,26 +33,26 @@
 
         <ImageView
             android:id="@+id/iv_topbannerGame"
-            android:src="@drawable/ic_topbanner_game"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_topbanner_game" />
 
         <!--layout_alignRight对齐目标空间右上角，且没有间距！-->
         <!--layout_toRightOf是相对于父控件将之放在目标空间右边，受父控件属性gravity=center的影响！-->
         <ImageView
-            android:layout_alignRight="@id/iv_topbannerGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignRight="@id/iv_topbannerGame"
             android:background="@drawable/red_dot" />
 
         <ImageView
             android:id="@+id/iv_topbannerHistoryRecord"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/iv_topbannerGame"
-            android:src="@drawable/ic_topbanner_record"/>
+            android:src="@drawable/ic_topbanner_record" />
 
 
     </RelativeLayout>

@@ -28,6 +28,11 @@ import com.example.administrator.mobileplayer.entity.LocalAudio;
 import com.example.administrator.mobileplayer.service.MusicPlayerService;
 import com.example.administrator.mobileplayer.util.CacheUtils;
 import com.example.administrator.mobileplayer.util.DateUtil;
+import com.example.administrator.mobileplayer.util.LogUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -50,8 +55,8 @@ public class SystemAudioPlayer extends Activity implements View.OnClickListener 
     private int position;
     private IMusicPlayerService iMusicPlayerService;    //服务的代理类，通过该方法调用服务的方法
     private ArrayList<LocalAudio> localAudios;
-    private SetAudioDataReceiver registerReceiver;
-    private PlayCompleteReceiver playCompleteReceiver;
+//    private SetAudioDataReceiver registerReceiver;
+//    private PlayCompleteReceiver playCompleteReceiver;
     private boolean isPlaying = true;
     private DateUtil dateUtil;
     /**
@@ -192,35 +197,49 @@ public class SystemAudioPlayer extends Activity implements View.OnClickListener 
         btnAudioPlayOrPause.setBackgroundResource(R.drawable.btn_audio_pause_selector);
 
         dateUtil = new DateUtil();
-        registerReceiver = new SetAudioDataReceiver();
-        playCompleteReceiver = new PlayCompleteReceiver();
+//        registerReceiver = new SetAudioDataReceiver();
+//        playCompleteReceiver = new PlayCompleteReceiver();
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(MusicPlayerService.OPEN_AUDIO);
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction(MusicPlayerService.OPEN_AUDIO);
 
-        IntentFilter playCompleteIntentFilter = new IntentFilter();
-        playCompleteIntentFilter.addAction(MusicPlayerService.PLAY_COMPLETE);
+//        IntentFilter playCompleteIntentFilter = new IntentFilter();
+//        playCompleteIntentFilter.addAction(MusicPlayerService.PLAY_COMPLETE);
 
-        registerReceiver(registerReceiver, intentFilter);
-        registerReceiver(playCompleteReceiver, playCompleteIntentFilter);
+//        registerReceiver(registerReceiver, intentFilter);
+//        registerReceiver(playCompleteReceiver, playCompleteIntentFilter);
+
+        EventBus.getDefault().register(this);
     }
 
-    class SetAudioDataReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            setAudioData();//列表进入开始播放并且设置歌曲信息
-        }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = false, priority = 0)
+    public void onReceiveSetData(LocalAudio localAudio){        //参数为订阅标志
+        setAudioData();
     }
 
-    class PlayCompleteReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            isPlaying = false;
-            btnAudioPlayOrPause.setBackgroundResource(R.drawable.btn_audio_play_selector);
-        }
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = false, priority = 1)
+    public void onReceiveSetPlayOrPauseBtn(ArrayList<LocalAudio> localAudios){
+        LogUtil.e("1111");
+        isPlaying = false;
+        btnAudioPlayOrPause.setBackgroundResource(R.drawable.btn_audio_play_selector);
     }
+
+//    class SetAudioDataReceiver extends BroadcastReceiver {
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            setAudioData();//列表进入开始播放并且设置歌曲信息
+//        }
+//    }
+
+//    class PlayCompleteReceiver extends BroadcastReceiver{
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            isPlaying = false;
+//            btnAudioPlayOrPause.setBackgroundResource(R.drawable.btn_audio_play_selector);
+//        }
+//    }
 
     private Handler handler = new Handler() {
         @Override
@@ -315,15 +334,17 @@ public class SystemAudioPlayer extends Activity implements View.OnClickListener 
     protected void onDestroy() {
         super.onDestroy();
 
-        if (registerReceiver != null) {
-            unregisterReceiver(registerReceiver);
-            registerReceiver = null;        //将广播接收器置为null，便于垃圾回收器优先回收。
-        }
+        EventBus.getDefault().unregister(this);
 
-        if (playCompleteReceiver != null){
-            unregisterReceiver(playCompleteReceiver);
-            playCompleteReceiver = null;
-        }
+//        if (registerReceiver != null) {
+//            unregisterReceiver(registerReceiver);
+//            registerReceiver = null;        //将广播接收器置为null，便于垃圾回收器优先回收。
+//        }
+
+//        if (playCompleteReceiver != null){
+//            unregisterReceiver(playCompleteReceiver);
+//            playCompleteReceiver = null;
+//        }
 
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
