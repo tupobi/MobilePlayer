@@ -1,10 +1,14 @@
 package com.example.administrator.mobileplayer.pager;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -117,28 +121,40 @@ public class LocalVideoPager extends BasePager {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(1 * 1000);
-                ContentResolver contentResolver = mContext.getContentResolver();
-                Uri uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                String[] objs = {
-                        MediaStore.Video.Media.DISPLAY_NAME,//视频名
-                        MediaStore.Video.Media.DURATION,//时长
-                        MediaStore.Video.Media.SIZE,//大小
-                        MediaStore.Video.Media.DATA,//视频的播放地址
-                        MediaStore.Video.Media.ARTIST//艺术家
-                };
-                Cursor cursor = contentResolver.query(uri, objs, null, null, null);
-                if (cursor != null) {
-                    localVideos = new ArrayList<>();
-                    while (cursor.moveToNext()) {
-                        localVideos.add(new LocalVideo(cursor.getString(0), cursor.getLong(1), cursor.getLong(2),
-                                cursor.getString(3), cursor.getString(4)));
+                if (isGrantExternalRW((Activity) mContext)) {
+                    SystemClock.sleep(1 * 1000);
+                    ContentResolver contentResolver = mContext.getContentResolver();
+                    Uri uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                    String[] objs = {
+                            MediaStore.Video.Media.DISPLAY_NAME,//视频名
+                            MediaStore.Video.Media.DURATION,//时长
+                            MediaStore.Video.Media.SIZE,//大小
+                            MediaStore.Video.Media.DATA,//视频的播放地址
+                            MediaStore.Video.Media.ARTIST//艺术家
+                    };
+                    Cursor cursor = contentResolver.query(uri, objs, null, null, null);
+                    if (cursor != null) {
+                        localVideos = new ArrayList<>();
+                        while (cursor.moveToNext()) {
+                            localVideos.add(new LocalVideo(cursor.getString(0), cursor.getLong(1), cursor.getLong(2),
+                                    cursor.getString(3), cursor.getString(4)));
+                        }
+                        cursor.close();
                     }
-                    LogUtil.e(localVideos.size() + "");
-                    cursor.close();
+                    handler.sendEmptyMessage(1);
                 }
-                handler.sendEmptyMessage(1);
             }
         }).start();//不要忘记启动子线程
+    }
+
+    public static boolean isGrantExternalRW(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            activity.requestPermissions(new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, 1);
+            return false;
+        }
+        return true;
     }
 }
